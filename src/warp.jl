@@ -116,13 +116,13 @@ julia> img = testimage("cameraman")
 julia> imrotate(img, π/4)
 
 # rotate with bilinear interpolation and with cropping
-julia> imrotate(img, π/4, axes(img))
+julia> imrotate(img, π/4)[axes(img)...]
 
 # rotate with nearest interpolation but without cropping
 julia> imrotate(img, π/4, Constant())
 ```
 
-See also [`warp`](@ref).
+See also [`warp`](@ref), [Interpolations.jl](https://github.com/JuliaMath/Interpolations.jl).
 """
 function imrotate(img::AbstractArray{T}, θ::Real, args...) where T
     θ = floor(mod(θ,2pi)*typemax(Int16))/typemax(Int16) # periodic discretezation
